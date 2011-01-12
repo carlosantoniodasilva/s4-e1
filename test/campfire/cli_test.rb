@@ -46,7 +46,7 @@ class TestCli < MiniTest::Unit::TestCase
   def test_run_executes_the_given_command
     cli = Campfire::Cli.new(%w[-s foo -t 123 --rooms])
 
-    rooms = cli.run!
+    rooms = cli.run
     assert_equal 2, rooms.size
     assert_instance_of Campfire::Room, rooms.first
   end

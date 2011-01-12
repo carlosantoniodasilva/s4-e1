@@ -7,17 +7,17 @@ module Campfire
     def initialize(argv)
       @argv    = argv
       @options = { :command => :rooms }
-      parse_options!
-      validate_options!
+      parse_options
+      validate_options
     end
 
-    def run!
+    def run
       manager.send(@options[:command])
     end
 
     private
 
-    def parse_options!
+    def parse_options
       options_parser.parse!(@argv)
     end
 
@@ -38,7 +38,7 @@ module Campfire
       end
     end
 
-    def validate_options!
+    def validate_options
       [:subdomain, :token].each do |required_option|
         next if options[required_option]
         raise OptionParser::MissingArgument, "#{required_option.capitalize} is missing"
