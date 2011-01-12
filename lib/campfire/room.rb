@@ -8,5 +8,9 @@ module Campfire
       @name    = attributes["name"]
       @topic   = attributes["topic"]
     end
+
+    def to_s
+      %Q[Room #{@id}: #{@name}#{" (#{@topic})" if @topic}]
+    end
   end
 end
