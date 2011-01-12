@@ -12,7 +12,7 @@ module Campfire
       find_rooms 'presence'
     end
 
-  private
+    private
 
     def find_rooms(path)
       @connection.get("/#{path}.json")["rooms"].map do |room|

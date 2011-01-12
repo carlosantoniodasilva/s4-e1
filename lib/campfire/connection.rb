@@ -13,7 +13,7 @@ module Campfire
       parse_json request(:get, path)
     end
 
-  private
+    private
 
     # TODO: handle invalid auth
     # TODO: handle ssl

@@ -15,7 +15,7 @@ module Campfire
       manager.send(@options[:command])
     end
 
-  private
+    private
 
     def parse_options!
       options_parser.parse!(@argv)
