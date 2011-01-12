@@ -5,7 +5,17 @@ module Campfire
     end
 
     def rooms
-      @connection.get("/rooms.json")["rooms"].map do |room|
+      find_rooms 'rooms'
+    end
+
+    def presence
+      find_rooms 'presence'
+    end
+
+  private
+
+    def find_rooms(path)
+      @connection.get("/#{path}.json")["rooms"].map do |room|
         Room.new(self, room)
       end
     end
