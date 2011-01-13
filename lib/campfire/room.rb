@@ -13,6 +13,12 @@ module Campfire
       %Q[Room #{@id}: #{@name}#{" (#{@topic})" if @topic}]
     end
 
+    def recent
+      get("recent")["messages"].map do |message|
+        Message.new(self, message)
+      end
+    end
+
     def join
       post "join"
     end
@@ -22,6 +28,10 @@ module Campfire
     end
 
     private
+
+    def get(action)
+      @manager.connection.get room_url(action)
+    end
 
     def post(action)
       @manager.connection.post room_url(action)

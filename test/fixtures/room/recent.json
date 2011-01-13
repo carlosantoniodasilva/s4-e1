@@ -1,0 +1,36 @@
+{
+  "messages": [
+    {
+      "type": "TimestampMessage",
+      "room_id": 366919,
+      "created_at": "2011/01/13 01:05:00 +0000",
+      "id": 298793883,
+      "body": null,
+      "user_id": null
+    },
+    { 
+      "type": "EnterMessage",
+      "room_id":366919,
+      "created_at": "2011/01/13 01:05:41 +0000",
+      "id": 298793884,
+      "body": null,
+      "user_id": 442319
+    },
+    {
+      "type": "TextMessage",
+      "room_id":366919,
+      "created_at": "2011/01/13 01:05:46 +0000",
+      "id": 298793911,
+      "body": "Hello World!",
+      "user_id": 442319
+    },
+    {
+      "type": "LeaveMessage",
+      "room_id": 366919,
+      "created_at": "2011/01/13 01:05:49 +0000",
+      "id": 298793919,
+      "body": null,
+      "user_id": 442319
+    }
+  ]
+}

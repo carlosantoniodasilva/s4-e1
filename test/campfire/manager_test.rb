@@ -17,7 +17,7 @@ class TestManager < MiniTest::Unit::TestCase
     assert_equal "RMU", room.topic
   end
 
-  def test_rooms
+  def test_presence_rooms
     manager = Campfire::Manager.new(:subdomain => "foo", :token => "123")
     rooms   = manager.presence
     assert_equal 1, rooms.size
