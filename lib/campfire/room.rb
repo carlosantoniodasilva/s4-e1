@@ -12,5 +12,9 @@ module Campfire
     def to_s
       %Q[Room #{@id}: #{@name}#{" (#{@topic})" if @topic}]
     end
+
+    def join
+      @manager.connection.post "/room/#{@id}/join.json"
+    end
   end
 end

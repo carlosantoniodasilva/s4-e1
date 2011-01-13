@@ -1,6 +1,7 @@
 module Campfire
   class Connection
     include HTTParty
+    headers 'Content-Type' => 'application/json'
 
     attr_reader :subdomain, :token
 
@@ -19,10 +20,14 @@ module Campfire
       self.class.get(path)
     end
 
+    def post(path)
+      self.class.post(path)
+    end
+
     private
 
     def host_with_subdomain
-      @host_with_subdomain ||= "#{@subdomain}.campfirenow.com"
+      @host_with_subdomain ||= "https://#{@subdomain}.campfirenow.com"
     end
   end
 end

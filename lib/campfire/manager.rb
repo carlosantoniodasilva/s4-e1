@@ -1,5 +1,7 @@
 module Campfire
   class Manager
+    attr_reader :connection
+
     def initialize(options)
       @connection = Connection.new(options)
     end

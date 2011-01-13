@@ -19,4 +19,13 @@ class TestManager < MiniTest::Unit::TestCase
     room = Campfire::Room.new(nil, "id" => "1", "name" => "bar", "topic" => "foo")
     assert_equal "Room 1: bar (foo)", room.to_s
   end
+
+  def test_join
+    manager = Campfire::Manager.new(:subdomain => "foo", :token => "123")
+    room    = manager.rooms.first
+
+    response = room.join
+    assert response
+    assert_equal 200, response.code
+  end
 end

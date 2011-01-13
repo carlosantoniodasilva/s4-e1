@@ -12,7 +12,11 @@ def read_fixture(file_name)
 end
 
 WebMock.disable_net_connect!
-WebMock.stub_request(:get, %r[http://123:X@.*\.campfirenow\.com/rooms\.json]).
+WebMock.stub_request(:get, "https://123:X@foo.campfirenow.com/rooms.json").
         to_return(:body => read_fixture("rooms.json"), :headers => { "Content-Type" => "application/json" })
-WebMock.stub_request(:get, %r[http://123:X@.*\.campfirenow\.com/presence\.json]).
+WebMock.stub_request(:get, "https://123:X@foo.campfirenow.com/presence.json").
         to_return(:body => read_fixture("presence.json"), :headers => { "Content-Type" => "application/json" })
+
+WebMock.stub_request(:post, "https://123:X@foo.campfirenow.com/room/214394/join.json").
+        to_return(:body => read_fixture('room/join.json'), :headers => { "Content-Type" => "application/json" })
+
