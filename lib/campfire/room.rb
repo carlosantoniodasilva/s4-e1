@@ -14,7 +14,21 @@ module Campfire
     end
 
     def join
-      @manager.connection.post "/room/#{@id}/join.json"
+      post "join"
+    end
+
+    def leave
+      post "leave"
+    end
+
+    private
+
+    def post(action)
+      @manager.connection.post room_url(action)
+    end
+
+    def room_url(action)
+      "/room/#{@id}/#{action}.json"
     end
   end
 end

@@ -28,4 +28,13 @@ class TestManager < MiniTest::Unit::TestCase
     assert response
     assert_equal 200, response.code
   end
+
+  def test_leave
+    manager = Campfire::Manager.new(:subdomain => "foo", :token => "123")
+    room    = manager.rooms.first
+
+    response = room.leave
+    assert response
+    assert_equal 200, response.code
+  end
 end
