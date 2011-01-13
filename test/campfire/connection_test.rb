@@ -11,7 +11,8 @@ class TestConnection < MiniTest::Unit::TestCase
   end
 
   def test_get_returns_parsed_json
-    WebMock.stub_request(:get, %r[foo.campfirenow.com/bar.json]).to_return(:body => '{"success":1}')
+    WebMock.stub_request(:get, %r[foo.campfirenow.com/bar.json]).
+      to_return(:body => '{"success":1}', :headers => { "Content-Type" => "application/json" })
 
     response = @connection.get("/bar.json")
     assert_equal 1, response["success"]

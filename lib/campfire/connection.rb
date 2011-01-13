@@ -1,41 +1,28 @@
-require 'net/http'
-
 module Campfire
   class Connection
+    include HTTParty
+
     attr_reader :subdomain, :token
 
-    def initialize(options)
+    # TODO: handle invalid auth
+    # TODO: handle ssl
+     def initialize(options)
       @subdomain = options[:subdomain]
       @token     = options[:token]
+
+      self.class.base_uri(host_with_subdomain)
+      self.class.basic_auth(@token, 'X')
     end
 
+    # TODO: handle parsing errors
     def get(path)
-      parse_json request(:get, path)
+      self.class.get(path)
     end
 
     private
 
-    # TODO: handle invalid auth
-    # TODO: handle ssl
-    def request(method, path)
-      Net::HTTP.start(host_with_subdomain, :use_ssl => true) do |http|
-        request = Net::HTTP.const_get(method.to_s.capitalize).new(path)
-        request.basic_auth @token, "X"
-        http.request(request).body
-      end
-    end
-
     def host_with_subdomain
       @host_with_subdomain ||= "#{@subdomain}.campfirenow.com"
-    end
-
-    # TODO: handle parsing errors
-    def parse_json(response)
-      parser.parse(response)
-    end
-
-    def parser
-      @parser ||= Yajl::Parser.new
     end
   end
 end

@@ -1,6 +1,6 @@
 source :rubygems
 
-gem "yajl-ruby", "0.7.8", :require => "yajl"
+gem "httparty", "0.6.1"
 
 group :test  do
   gem "ruby-debug19"
