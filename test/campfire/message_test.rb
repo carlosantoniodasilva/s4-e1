@@ -11,4 +11,12 @@ class TestMessage < MiniTest::Unit::TestCase
     assert_equal "TextMessage", message.type
     assert_equal "2011/01/13 01:05:49 +0000", message.created_at
   end
+
+  def test_string_representation
+    room    = Campfire::Room.new(nil, "id" => "1")
+    message = Campfire::Message.new(room, "id" => "1",
+      "type" => "TextMessage", "body" => "Hello!", "created_at" => "2011/01/13 01:05:49 +0000")
+
+    assert_equal "Message 1: Hello! (Text - 2011/01/13 01:05:49)", message.to_s
+  end
 end
