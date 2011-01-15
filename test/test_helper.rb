@@ -16,6 +16,8 @@ WebMock.stub_request(:get, "https://123:X@foo.campfirenow.com/rooms.json").
         to_return(:body => read_fixture("rooms.json"), :headers => { "Content-Type" => "application/json" })
 WebMock.stub_request(:get, "https://123:X@foo.campfirenow.com/presence.json").
         to_return(:body => read_fixture("presence.json"), :headers => { "Content-Type" => "application/json" })
+WebMock.stub_request(:get, "https://123:X@foo.campfirenow.com/search/hello.json").
+        to_return(:body => read_fixture("search.json"), :headers => { "Content-Type" => "application/json" })
 
 WebMock.stub_request(:get, "https://123:X@foo.campfirenow.com/room/214394/recent.json").
         with(:headers => {'Content-Type'=>'application/json'}).

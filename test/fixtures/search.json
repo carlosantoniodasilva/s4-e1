@@ -1,0 +1,28 @@
+{
+  "messages": [
+    {
+      "type": "TextMessage",
+      "room_id": 366919,
+      "created_at": "2011/01/13 01:05:46 +0000",
+      "id": 298793911,
+      "body": "Hello World!",
+      "user_id": 442319
+    },
+    {
+      "type": "TextMessage",
+      "room_id": 366919,
+      "created_at": "2011/01/13 01:05:47 +0000",
+      "id": 298793912,
+      "body": "Other Hello World!",
+      "user_id": 442319
+    },
+    {
+      "type": "TextMessage",
+      "room_id": 366919,
+      "created_at": "2011/01/13 01:05:48 +0000",
+      "id": 298793913,
+      "body": "More One Hello World!",
+      "user_id": 442319
+    }    
+  ]
+}

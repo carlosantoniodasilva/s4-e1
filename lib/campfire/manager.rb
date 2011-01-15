@@ -14,6 +14,14 @@ module Campfire
       find_rooms 'presence'
     end
 
+    # TODO: validate blank search
+    def search(term)
+      @connection.get("/search/#{term}.json")["messages"].map do |message|
+        room = Room.new(self, "id" => message["room_id"])
+        Message.new(room, message)
+      end
+    end
+
     private
 
     def find_rooms(path)
