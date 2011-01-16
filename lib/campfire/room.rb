@@ -33,6 +33,11 @@ module Campfire
       Message.new(self, message)
     end
 
+    def paste(paste_text)
+      message = post("speak", :message => { :body => paste_text, :type => "PasteMessage" })
+      Message.new(self, message)
+    end
+
     private
 
     def get(action)

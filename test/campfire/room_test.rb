@@ -62,5 +62,16 @@ class TestRoom < MiniTest::Unit::TestCase
     assert_instance_of Campfire::Message, message
     assert_equal "hello world!", message.body
     assert_equal 298793920, message.id
+    assert_equal "TextMessage", message.type
+  end
+
+  def test_paste
+    room    = @manager.rooms.first
+    message = room.paste("hello world!")
+
+    assert_instance_of Campfire::Message, message
+    assert_equal "hello world!", message.body
+    assert_equal 298793921, message.id
+    assert_equal "PasteMessage", message.type
   end
 end

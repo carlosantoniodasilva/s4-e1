@@ -29,3 +29,5 @@ WebMock.stub_request(:post, "https://123:X@foo.campfirenow.com/room/214394/leave
         to_return(:status => 200, :headers => { "Content-Type" => "application/json" })
 WebMock.stub_request(:post, "https://123:X@foo.campfirenow.com/room/214394/speak.json?message%5Bbody%5D=hello%20world!&message%5Btype%5D=TextMessage").
         to_return(:status => 200, :body => read_fixture("room/speak.json"), :headers => { "Content-Type" => "application/json" })
+WebMock.stub_request(:post, "https://123:X@foo.campfirenow.com/room/214394/speak.json?message%5Bbody%5D=hello%20world!&message%5Btype%5D=PasteMessage").
+        to_return(:status => 200, :body => read_fixture("room/paste.json"), :headers => { "Content-Type" => "application/json" })
