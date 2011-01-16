@@ -52,4 +52,10 @@ class TestManager < MiniTest::Unit::TestCase
     assert_equal "More One Hello World!", message.body
     assert_equal "TextMessage", message.type
   end
+
+  def test_me
+    user = @manager.me
+    assert_equal "Carlos", user.name
+    assert_equal "carlos@campfirenow.com", user.email
+  end
 end

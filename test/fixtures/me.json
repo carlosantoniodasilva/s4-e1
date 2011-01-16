@@ -1,0 +1,11 @@
+{
+  "user": {
+    "type": "Member",
+    "created_at": "2011/01/14 17:07:00 +0000",
+    "admin": true, 
+    "email_address": "carlos@campfirenow.com",
+    "id": 443322,
+    "name": "Carlos",
+    "api_auth_token": "123abc123abc"
+  }
+}

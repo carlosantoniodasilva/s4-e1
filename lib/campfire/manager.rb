@@ -26,6 +26,11 @@ module Campfire
       Room.new(self, "id" => room_id)
     end
 
+    def me
+      user = @connection.get("/users/me.json")
+      User.new(self, user["user"])
+    end
+
     private
 
     def find_rooms(path)
