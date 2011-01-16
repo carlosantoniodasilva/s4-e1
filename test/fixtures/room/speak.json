@@ -1,8 +1,10 @@
 {
-  "type": "TextMessage",
-  "room_id": 366919,
-  "created_at": "2011/01/14 22:49:49 +0000",
-  "id": 298793920,
-  "body": "hello world!",
-  "user_id": 442319
+  "message": {
+    "type": "TextMessage",
+    "room_id": 366919,
+    "created_at": "2011/01/14 22:49:49 +0000",
+    "id": 298793920,
+    "body": "hello world!",
+    "user_id": 442319
+  }
 }

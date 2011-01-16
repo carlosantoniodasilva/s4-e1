@@ -12,7 +12,9 @@ module Campfire
     end
 
     def run
-      manager.send(@options[:command])
+      obj = manager.send(*Array(@options[:command]))
+      obj = obj.send(*@options[:subcommand]) if @options[:subcommand]
+      obj
     end
 
     private
@@ -32,8 +34,14 @@ module Campfire
           @options[:token] = value
         end
 
-        opt.on "--rooms", "List all rooms" do |value|
+        opt.on "--rooms", "List all rooms" do
           @options[:command] = :rooms
+        end
+        opt.on "--room ROOM_ID", Integer, "Select room id to run a sub command" do |value|
+          @options[:command] = [:room, value]
+        end
+        opt.on "--speak MESSAGE", "Send a message to the given room (see --room)" do |value|
+          @options[:subcommand] = [:speak, value]
         end
       end
     end

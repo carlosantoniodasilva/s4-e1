@@ -20,6 +20,12 @@ class TestManager < MiniTest::Unit::TestCase
     assert_equal "RMU", room.topic
   end
 
+  def test_room
+    room = @manager.room(214394)
+    assert_equal 214394, room.id
+    assert_nil room.name
+  end
+
   def test_presence_rooms
     rooms = @manager.presence
     assert_equal 1, rooms.size

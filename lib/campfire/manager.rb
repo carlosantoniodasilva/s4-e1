@@ -22,6 +22,10 @@ module Campfire
       end
     end
 
+    def room(room_id)
+      Room.new(self, "id" => room_id)
+    end
+
     private
 
     def find_rooms(path)

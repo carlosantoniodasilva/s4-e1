@@ -33,14 +33,24 @@ class TestCli < MiniTest::Unit::TestCase
     end
   end
 
-  def test_default_command
+  def test_default_command_options
     cli = Campfire::Cli.new(%w[-s foo -t 123])
     assert_equal :rooms, cli.options[:command]
   end
 
-  def test_rooms_command
+  def test_rooms_command_options
     cli = Campfire::Cli.new(%w[-s foo -t 123 --rooms])
     assert_equal :rooms, cli.options[:command]
+  end
+
+  def test_room_command_options
+    cli = Campfire::Cli.new(%w(-s foo -t 123 --room 123 --speak foo))
+    assert_equal [:room, 123], cli.options[:command]
+  end
+
+  def test_speak_room_command_options
+    cli = Campfire::Cli.new(%w(-s foo -t 123 --room 123 --speak foo))
+    assert_equal [:speak, "foo"], cli.options[:subcommand]
   end
 
   def test_run_executes_the_given_command
@@ -49,5 +59,12 @@ class TestCli < MiniTest::Unit::TestCase
     rooms = cli.run
     assert_equal 2, rooms.size
     assert_instance_of Campfire::Room, rooms.first
+  end
+
+  def test_run_executes_the_given_command_with_subcommand
+    cli = Campfire::Cli.new(%w(-s foo -t 123 --room 214394 --speak hello\ world!))
+
+    message = cli.run
+    assert_equal "hello world!", message.body
   end
 end

@@ -53,7 +53,7 @@ module Campfire
 
     def send_message(message, type)
       message = post("speak", :message => { :body => message, :type => type })
-      Message.new(self, message)
+      Message.new(self, message["message"])
     end
   end
 end
