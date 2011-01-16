@@ -65,7 +65,7 @@ module Campfire
     end
 
     def validate_options
-      [:subdomain, :token].each do |required_option|
+      [:subdomain, :token, :command].each do |required_option|
         next if options[required_option]
         raise OptionParser::MissingArgument, "#{required_option.capitalize} is missing"
       end

@@ -2,14 +2,14 @@ require "test_helper"
 
 class TestCli < MiniTest::Unit::TestCase
   def test_valid_shortcuts_for_argv
-    cli = Campfire::Cli.new(%w[-s foo -t 123])
+    cli = Campfire::Cli.new(%w[-s foo -t 123 --rooms])
 
     assert_equal "foo", cli.options[:subdomain]
     assert_equal "123", cli.options[:token]
   end
 
   def test_valid_normal_options_for_argv
-    cli = Campfire::Cli.new(%w[--subdomain foo --token 123])
+    cli = Campfire::Cli.new(%w[--subdomain foo --token 123 --rooms])
 
     assert_equal "foo", cli.options[:subdomain]
     assert_equal "123", cli.options[:token]
@@ -21,9 +21,17 @@ class TestCli < MiniTest::Unit::TestCase
     end
   end
 
-  def test_missing_required_option
+  def test_required_options
     assert_raises OptionParser::MissingArgument do
       Campfire::Cli.new(%w(-s foo))
+    end
+
+    assert_raises OptionParser::MissingArgument do
+      Campfire::Cli.new(%w(-t 123))
+    end
+
+    assert_raises OptionParser::MissingArgument do
+      Campfire::Cli.new(%w(-s foo -t 123))
     end
   end
 
