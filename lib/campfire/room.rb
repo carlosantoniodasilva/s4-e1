@@ -28,14 +28,13 @@ module Campfire
     end
 
     # TODO: handle failing cases of speak
-    def speak(message_text)
-      message = post("speak", :message => { :body => message_text, :type => "TextMessage" })
-      Message.new(self, message)
+    # TODO: SoundMessage and TweetMessage
+    def speak(message)
+      send_message message, "TextMessage"
     end
 
-    def paste(paste_text)
-      message = post("speak", :message => { :body => paste_text, :type => "PasteMessage" })
-      Message.new(self, message)
+    def paste(message)
+      send_message message, "PasteMessage"
     end
 
     private
@@ -50,6 +49,11 @@ module Campfire
 
     def room_url(action)
       "/room/#{@id}/#{action}.json"
+    end
+
+    def send_message(message, type)
+      message = post("speak", :message => { :body => message, :type => type })
+      Message.new(self, message)
     end
   end
 end
