@@ -37,6 +37,9 @@ module Campfire
         opt.on "--rooms", "List all rooms" do
           @options[:command] = :rooms
         end
+        opt.on "--presence", "List all rooms that I am currently in" do
+          @options[:command] = :presence
+        end
         opt.on "--room ROOM_ID", Integer, "Select room id to run a sub command" do |value|
           @options[:command] = [:room, value]
         end
