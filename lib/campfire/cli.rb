@@ -6,12 +6,14 @@ module Campfire
 
     def initialize(argv)
       @argv    = argv
-      @options = { :command => :rooms }
+      @options = {}
       parse_options
-      validate_options
+      validate_options if options?
     end
 
     def run
+      return options_parser.inspect unless options?
+
       obj = manager.send(*Array(@options[:command]))
       obj = obj.send(*@options[:subcommand]) if @options[:subcommand]
       obj
@@ -34,6 +36,8 @@ module Campfire
           @options[:token] = value
         end
 
+        opt.separator ""
+
         opt.on "--rooms", "List all rooms" do
           @options[:command] = :rooms
         end
@@ -54,6 +58,10 @@ module Campfire
           @options[:subcommand] = [:paste, value]
         end
       end
+    end
+
+    def options?
+      !@options.empty?
     end
 
     def validate_options

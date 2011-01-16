@@ -21,21 +21,10 @@ class TestCli < MiniTest::Unit::TestCase
     end
   end
 
-  def test_blank_option_raises_error
-    assert_raises OptionParser::MissingArgument do
-      Campfire::Cli.new([])
-    end
-  end
-
   def test_missing_required_option
     assert_raises OptionParser::MissingArgument do
       Campfire::Cli.new(%w(-s foo))
     end
-  end
-
-  def test_default_command_options
-    cli = Campfire::Cli.new(%w[-s foo -t 123])
-    assert_equal :rooms, cli.options[:command]
   end
 
   def test_rooms_command_options
@@ -81,5 +70,15 @@ class TestCli < MiniTest::Unit::TestCase
 
     message = cli.run
     assert_equal "hello world!", message.body
+  end
+
+  def test_help
+    cli = Campfire::Cli.new([])
+
+    help_message = cli.run
+    assert_match /Campfire Command Line Tool/, help_message
+    assert_match /--rooms/, help_message
+    assert_match /--search.*Search the given term/, help_message
+    assert_match /--speak/, help_message
   end
 end
