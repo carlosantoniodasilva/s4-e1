@@ -48,6 +48,11 @@ class TestCli < MiniTest::Unit::TestCase
     assert_equal :presence, cli.options[:command]
   end
 
+  def test_search_command_options
+    cli = Campfire::Cli.new(%w[-s foo -t 123 --search foo])
+    assert_equal [:search, "foo"], cli.options[:command]
+  end
+
   def test_room_command_options
     cli = Campfire::Cli.new(%w(-s foo -t 123 --room 123 --speak foo))
     assert_equal [:room, 123], cli.options[:command]
