@@ -43,6 +43,9 @@ module Campfire
         opt.on "--speak MESSAGE", "Send a message to the given room (see --room)" do |value|
           @options[:subcommand] = [:speak, value]
         end
+        opt.on "--paste CONTENT", "Paste the given content to the given room (see --room)" do |value|
+          @options[:subcommand] = [:paste, value]
+        end
       end
     end
 

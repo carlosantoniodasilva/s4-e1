@@ -48,9 +48,14 @@ class TestCli < MiniTest::Unit::TestCase
     assert_equal [:room, 123], cli.options[:command]
   end
 
-  def test_speak_room_command_options
+  def test_speak_into_room_command_options
     cli = Campfire::Cli.new(%w(-s foo -t 123 --room 123 --speak foo))
     assert_equal [:speak, "foo"], cli.options[:subcommand]
+  end
+
+  def test_paste_into_room_command_options
+    cli = Campfire::Cli.new(%w(-s foo -t 123 --room 123 --paste foo))
+    assert_equal [:paste, "foo"], cli.options[:subcommand]
   end
 
   def test_run_executes_the_given_command
