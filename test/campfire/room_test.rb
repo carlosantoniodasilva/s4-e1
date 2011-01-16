@@ -1,9 +1,12 @@
 require "test_helper"
 
 class TestRoom < MiniTest::Unit::TestCase
+  def setup
+    @manager = Campfire::Manager.new(:subdomain => "foo", :token => "123")
+  end
+
   def test_initialization
-    manager = Campfire::Manager.new(:subdomain => "foo", :token => "123")
-    room    = Campfire::Room.new(manager, "id" => "1", "name" => "bar")
+    room = Campfire::Room.new(@manager, "id" => "1", "name" => "bar")
 
     assert_equal "1", room.id
     assert_equal "bar", room.name
@@ -11,19 +14,17 @@ class TestRoom < MiniTest::Unit::TestCase
   end
 
   def test_string_representation_with_empty_topic
-    room = Campfire::Room.new(nil, "id" => "1", "name" => "bar")
+    room = Campfire::Room.new(@manager, "id" => "1", "name" => "bar")
     assert_equal "Room 1: bar", room.to_s
   end
 
   def test_string_representation_with_topic
-    room = Campfire::Room.new(nil, "id" => "1", "name" => "bar", "topic" => "foo")
+    room = Campfire::Room.new(@manager, "id" => "1", "name" => "bar", "topic" => "foo")
     assert_equal "Room 1: bar (foo)", room.to_s
   end
 
   def test_recent_messages
-    manager = Campfire::Manager.new(:subdomain => "foo", :token => "123")
-    room    = manager.rooms.first
-
+    room     = @manager.rooms.first
     messages = room.recent
     assert_equal 4, messages.size
 
@@ -39,20 +40,27 @@ class TestRoom < MiniTest::Unit::TestCase
   end
 
   def test_join
-    manager = Campfire::Manager.new(:subdomain => "foo", :token => "123")
-    room    = manager.rooms.first
-
+    room     = @manager.rooms.first
     response = room.join
+
     assert response
     assert_equal 200, response.code
   end
 
   def test_leave
-    manager = Campfire::Manager.new(:subdomain => "foo", :token => "123")
-    room    = manager.rooms.first
-
+    room     = @manager.rooms.first
     response = room.leave
+
     assert response
     assert_equal 200, response.code
+  end
+
+  def test_speak
+    room    = @manager.rooms.first
+    message = room.speak("hello world!")
+
+    assert_instance_of Campfire::Message, message
+    assert_equal "hello world!", message.body
+    assert_equal 298793920, message.id
   end
 end

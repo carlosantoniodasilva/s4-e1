@@ -27,14 +27,20 @@ module Campfire
       post "leave"
     end
 
+    # TODO: handle failing cases of speak
+    def speak(message_text)
+      message = post("speak", :message => { :body => message_text, :type => "TextMessage" })
+      Message.new(self, message)
+    end
+
     private
 
     def get(action)
       @manager.connection.get room_url(action)
     end
 
-    def post(action)
-      @manager.connection.post room_url(action)
+    def post(action, body=nil)
+      @manager.connection.post room_url(action), body
     end
 
     def room_url(action)

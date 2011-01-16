@@ -20,8 +20,8 @@ module Campfire
       self.class.get(path)
     end
 
-    def post(path)
-      self.class.post(path)
+    def post(path, body=nil)
+      self.class.post(path, :query => body)
     end
 
     private
